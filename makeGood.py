@@ -13,3 +13,6 @@ class Solution:
             length_next_s = len(s_list)
         returned_s = ''.join(s_list)
         return returned_s
+
+mg = Solution
+print mg.makeGood('aBbACc')
