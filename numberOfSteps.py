@@ -8,4 +8,4 @@ class Solution:
             else:
                 num=num-1
                 count+=1
-        return count
+        return count # while n != 0: n, c = n - 1 if n % 2 else n//2, c + 1
