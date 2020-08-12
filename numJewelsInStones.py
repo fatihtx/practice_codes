@@ -6,4 +6,4 @@ class Solution:
         list_of_uniq_char_J = list(set(J))
         for i in list_of_uniq_char_J:
             count = count + S.count(i) 
-        return count
+        return count   # sum([1 for i in S if i in J])
