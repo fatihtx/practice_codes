@@ -5,3 +5,7 @@ class Solution:
         lict_r =    list(map(lambda x:len(str(x)),nums))
         list_even = list(filter(lambda x: x%2 == 0 ,lict_r))
         return len(list_even)
+'''
+    def findNumbers(self, nums: List[int]) -> int:
+        return sum(len(str(n)) % 2 == 0 for n in nums)
+'''
