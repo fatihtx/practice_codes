@@ -1,3 +1,75 @@
+class Solution:
+    def maxProfit(self, prices):
+        if not prices or len(prices) < 2:
+            return 0
+        max_element_index,min_element, max_diff = self.find_max_diff(prices)
+        #print (prices)
+        #print ("min_element " + str(min_element))
+        if max_diff == 0:
+            return 0
+        min_index = prices.index(min_element)
+        max_index = max_element_index
+        #print ("min_index "+ str(min_index))
+        #print ("max_index "+ str(max_index))
+        
+        first_portion_array = None
+        if min_index >= 2:
+            first_portion_array = prices[:min_index]
+        third_portion_array = None
+        if len(prices) - max_index >= 2:
+            third_portion_array = prices[max_index+1:]
+        inverse_of_second = None
+        if max_index - min_index >= 2:
+            inverse_of_second = prices[max_index-1:min_index:-1]
+        #print (first_portion_array)
+        #print (third_portion_array)
+        #print (inverse_of_second)
+        
+        max_diff_last = list()
+        max_diff_last.append(max_diff)
+                
+        max_diff_first = ""
+        if first_portion_array and len(first_portion_array) >= 2:
+            max_element_index,min_element, max_diff_first = self.find_max_diff(first_portion_array)
+            #print (max_diff_first)
+            max_diff1 = int(max_diff) + int(max_diff_first)
+            max_diff_last.append(max_diff1)
+        
+        max_diff_third = ""
+        if third_portion_array and len(third_portion_array) >= 2:
+            max_element_index,min_element, max_diff_third = self.find_max_diff(third_portion_array)
+            #print (max_diff_third)
+            max_diff3 = int(max_diff) + int(max_diff_third)
+            max_diff_last.append(max_diff3)
+        
+        max_diff_second = ""
+        if inverse_of_second and len(inverse_of_second) >= 2:
+            max_element_index,min_element, max_diff_second = self.find_max_diff(inverse_of_second)
+            #print (max_diff_first)
+            max_diff2 = int(max_diff) + int(max_diff_second) 
+            max_diff_last.append(max_diff2)
+        
+        return  max(max_diff_last)
+    
+    def find_max_diff(self, prices):
+        max_element_index = 0
+        element = prices[0]
+        min_element = prices[0]
+        max_diff = prices[1] - prices[0]
+        
+        for i in range(1,len(prices)):
+            if prices[i] - min_element >= max_diff:
+                max_diff = prices[i] - min_element
+                element = min_element
+                max_element_index = i
+            if prices[i] < min_element:
+                min_element = prices[i]
+        
+        if max_diff <= 0:
+            return 0,element,0
+        return max_element_index,element,max_diff
+
+'''
     def maxProfit(self, prices):
         value_list = []
         index_list = []
@@ -32,3 +104,4 @@
         #print (index_max)
         #print (transaction_times)
         return value_max
+'''
