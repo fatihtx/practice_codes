@@ -11,3 +11,11 @@ class Solution:
             number_list.append(curr.val)
             curr = curr.next 
         return int("".join(str(i) for i in number_list),2)
+
+ '''
+        answer = 0
+        while head: 
+            answer = 2*answer + head.val 
+            head = head.next 
+        return answer 
+ '''
